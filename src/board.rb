@@ -11,6 +11,8 @@ class Board
       [1, -1]
   ]
 
+  # @param [Integer] num_columns
+  # @param [Integer] num_cells
   def initialize(num_columns, num_cells)
     @num_columns = num_columns
     @num_cells = num_cells
@@ -32,12 +34,15 @@ class Board
     out.join("\n")
   end
 
+  # @param [Integer] column_index
+  # @param [String] player_symbol
   def move(column_index, player_symbol)
     raise RangeError.new('Column index should be from %d to %d' % [0, @num_columns - 1]) if column_index > @num_columns - 1
     raise RangeError.new('Column #%d is full' % column_index) unless @board[column_index].length < @num_cells
     @board[column_index] << player_symbol
   end
 
+  # @param [Integer] column_index
   def cancel_move(column_index)
     @board[column_index].pop
   end
@@ -47,6 +52,8 @@ class Board
   end
 
 
+  # @param [Integer] col
+  # @param [Integer] num
   def detect_winner(col, num)
     row = @board[col].count - 1
     sym = @board[col][row]
