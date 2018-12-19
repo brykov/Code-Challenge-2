@@ -30,7 +30,7 @@ module Strategies
         game.board.cancel_move(move)
         [move, score]
       end
-      moves.sort{rand}.send(max_player ? :max_by : :min_by) do |move|
+      moves.sort_by{rand}.send(max_player ? :max_by : :min_by) do |move|
         move[1]
       end
     end
